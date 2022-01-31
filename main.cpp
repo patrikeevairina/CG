@@ -6,7 +6,7 @@
 #include "stb_image.h"
 #define M_PI 3.14159265358979323846
 
-float translations[6][3] = //массив для того, чтобы задавать направление движения граням
+float translations[6][3] = //РјР°СЃСЃРёРІ РґР»СЏ С‚РѕРіРѕ, С‡С‚РѕР±С‹ Р·Р°РґР°РІР°С‚СЊ РЅР°РїСЂР°РІР»РµРЅРёРµ РґРІРёР¶РµРЅРёСЏ РіСЂР°РЅСЏРј
 {
 		{ 0.0, 0.0, -0.25 },
 		{ 0.0, 0.25, 0.0 },
@@ -16,7 +16,7 @@ float translations[6][3] = //массив для того, чтобы задавать направление движени
 		{ 0.0, 0.0, 0.25 },
 };
 
-float currentTranslations[6][3] = //состояние граней в данный момент
+float currentTranslations[6][3] = //СЃРѕСЃС‚РѕСЏРЅРёРµ РіСЂР°РЅРµР№ РІ РґР°РЅРЅС‹Р№ РјРѕРјРµРЅС‚
 {
 		{ 0.0, 0.0, 0.0 },
 		{ 0.0, 0.0, 0.0 },
@@ -26,7 +26,7 @@ float currentTranslations[6][3] = //состояние граней в данный момент
 		{ 0.0, 0.0, 0.0 },
 };
 
-float normals[6][3] = //массив нормалей
+float normals[6][3] = //РјР°СЃСЃРёРІ РЅРѕСЂРјР°Р»РµР№
 {
 		{ 0.0, 0.0, -1.0 },
 		{ 0.0, 1.0, 0.0 },
@@ -36,10 +36,10 @@ float normals[6][3] = //массив нормалей
 		{ 0.0, 0.0, 1.0 },
 };
 
-GLuint loadTexture(const char* filename) //загрузка текстуры
+GLuint loadTexture(const char* filename) //Р·Р°РіСЂСѓР·РєР° С‚РµРєСЃС‚СѓСЂС‹
 {
 	GLuint texture;
-	int w, h, count;//высота/ширина/кол-во каналов
+	int w, h, count;//РІС‹СЃРѕС‚Р°/С€РёСЂРёРЅР°/РєРѕР»-РІРѕ РєР°РЅР°Р»РѕРІ
 	unsigned char* data;
 	data = stbi_load(filename, &w, &h, &count, 0);
 	glEnable(GL_TEXTURE_2D);
@@ -57,7 +57,7 @@ GLuint loadTexture(const char* filename) //загрузка текстуры
 	return texture;
 }
 
-float vertices[72] = //массив вершин куба
+float vertices[72] = //РјР°СЃСЃРёРІ РІРµСЂС€РёРЅ РєСѓР±Р°
 {
 		-0.5, 0.5, -0.5,
 		-0.5, -0.5, -0.5,
@@ -90,7 +90,7 @@ float vertices[72] = //массив вершин куба
 		0.5, 0.5, 0.5
 };
 
-GLfloat texVertices[] = //вершины текстур
+GLfloat texVertices[] = //РІРµСЂС€РёРЅС‹ С‚РµРєСЃС‚СѓСЂ
 {
 		0, 0, 1, 0, 1, 1, 0, 1,
 		0, 0, 1, 0, 1, 1, 0, 1,
@@ -104,7 +104,7 @@ int oldTimeSinceStart = 0, textureMode = 0;
 double time;
 float alpha = 1.0;
 bool openCube;
-GLuint texture[7]; //массив текстур
+GLuint texture[7]; //РјР°СЃСЃРёРІ С‚РµРєСЃС‚СѓСЂ
 void display()
 {
 	int timeSinceStart = glutGet(GLUT_ELAPSED_TIME);
@@ -112,7 +112,7 @@ void display()
 	time += deltaTime * 0.4;
 	oldTimeSinceStart = timeSinceStart;
 
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);//очистка буферов цвета и глубины
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);//РѕС‡РёСЃС‚РєР° Р±СѓС„РµСЂРѕРІ С†РІРµС‚Р° Рё РіР»СѓР±РёРЅС‹
 	{
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
@@ -124,36 +124,36 @@ void display()
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	glDisable(GL_BLEND); //отключить прозрачность для сферы
-	GLfloat material_diffuse[] = { 1.0, 1.0, 1.0, alpha }; //как текстура взаимодействует со светом
-	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, material_diffuse);//внешняя и внутренняя стороны грани "активны"
+	//glDisable(GL_BLEND);
+	GLfloat material_diffuse[] = { 1.0, 1.0, 1.0, 1.0 }; //РєР°Рє С‚РµРєСЃС‚СѓСЂР° РІР·Р°РёРјРѕРґРµР№СЃС‚РІСѓРµС‚ СЃРѕ СЃРІРµС‚РѕРј
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, material_diffuse);//РІРЅРµС€РЅСЏСЏ Рё РІРЅСѓС‚СЂРµРЅРЅСЏСЏ СЃС‚РѕСЂРѕРЅС‹ РіСЂР°РЅРё "Р°РєС‚РёРІРЅС‹"
 
-	GLfloat pos[] = { (float)cos(time * M_PI) * 1.3f, 0.6, (float)sin(time * M_PI) * 1.3f, 1.0 };//движение источника света
-	GLfloat light_diffuse[] = { 1.0, 1.0, 1.0 }; //цвет источника света
+	GLfloat pos[] = { (float)cos(time * M_PI) * 1.3f, 0.6, (float)sin(time * M_PI) * 1.3f, 1.0 };//РґРІРёР¶РµРЅРёРµ РёСЃС‚РѕС‡РЅРёРєР° СЃРІРµС‚Р°
+	GLfloat light_diffuse[] = { 1.0, 1.0, 1.0 }; //С†РІРµС‚ РёСЃС‚РѕС‡РЅРёРєР° СЃРІРµС‚Р°
 
-	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse); //цвет ИС
-	glLightfv(GL_LIGHT0, GL_POSITION, pos); //позиция ИС
-	glLightf(GL_LIGHT0, GL_CONSTANT_ATTENUATION, 0.0); //формула рассеивания 
-	glLightf(GL_LIGHT0, GL_LINEAR_ATTENUATION, 0.2); //формула рассеивания 
-	glLightf(GL_LIGHT0, GL_QUADRATIC_ATTENUATION, 0.4); //формула рассеивания 
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse); //С†РІРµС‚ РРЎ
+	glLightfv(GL_LIGHT0, GL_POSITION, pos); //РїРѕР·РёС†РёСЏ РРЎ
+	glLightf(GL_LIGHT0, GL_CONSTANT_ATTENUATION, 0.0); //С„РѕСЂРјСѓР»Р° СЂР°СЃСЃРµРёРІР°РЅРёСЏ 
+	glLightf(GL_LIGHT0, GL_LINEAR_ATTENUATION, 0.2); //С„РѕСЂРјСѓР»Р° СЂР°СЃСЃРµРёРІР°РЅРёСЏ 
+	glLightf(GL_LIGHT0, GL_QUADRATIC_ATTENUATION, 0.4); //С„РѕСЂРјСѓР»Р° СЂР°СЃСЃРµРёРІР°РЅРёСЏ 
 
-	glDisable(GL_TEXTURE_2D);//отключить текстуру для сферы
+	glDisable(GL_TEXTURE_2D);//РѕС‚РєР»СЋС‡РёС‚СЊ С‚РµРєСЃС‚СѓСЂСѓ РґР»СЏ СЃС„РµСЂС‹
 
-	//изменение размеров  и поворот системы координат чтобы было красивее
+	//РёР·РјРµРЅРµРЅРёРµ СЂР°Р·РјРµСЂРѕРІ  Рё РїРѕРІРѕСЂРѕС‚ СЃРёСЃС‚РµРјС‹ РєРѕРѕСЂРґРёРЅР°С‚ С‡С‚РѕР±С‹ Р±С‹Р»Рѕ РєСЂР°СЃРёРІРµРµ
 	glScalef(0.75f, 0.75f, 0.75f);
-	glRotatef(30, 1, 0, 0);
-	glRotatef(30, 0, 1, 0);
+	glRotatef(5, 1, 0, 0);
+	glRotatef(5, 0, 1, 0);
 
-	//создание сферы
+	//СЃРѕР·РґР°РЅРёРµ СЃС„РµСЂС‹
 	glTranslatef(pos[0], pos[1], pos[2]);
 	glColor3d(1.0, 1.0, 1.0);
-	glutWireSphere(0.1, 10, 10); 
+	glutWireSphere(0.1, 60, 60); 
 
 	for (int i = 0; i < 6; ++i) 
 	{
 		auto t = translations[i];
 		auto& ct = currentTranslations[i];
-		float mn = (t[0] > 0 || t[1] > 0 || t[2] > 0) ? 0.2 : -0.2; //направление
+		float mn = (t[0] > 0 || t[1] > 0 || t[2] > 0) ? 0.2 : -0.2; //РЅР°РїСЂР°РІР»РµРЅРёРµ
 
 		if (openCube) 
 		{
@@ -170,22 +170,23 @@ void display()
 
 		glLoadIdentity();
 		glEnable(GL_TEXTURE_2D);
-		glEnable(GL_BLEND); //врубить прозрачность для куба
-		glVertexPointer(3, GL_FLOAT, 0, vertices); //указатель на массив вершин
-		glTexCoordPointer(2, GL_FLOAT, 0, texVertices); //указатель на вершины текстур
+		GLfloat material_diffuse[] = { 1.0, 1.0, 1.0, alpha };
+		glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, material_diffuse);
+		glVertexPointer(3, GL_FLOAT, 0, vertices); //СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РјР°СЃСЃРёРІ РІРµСЂС€РёРЅ
+		glTexCoordPointer(2, GL_FLOAT, 0, texVertices); //СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РІРµСЂС€РёРЅС‹ С‚РµРєСЃС‚СѓСЂ
 		glEnableClientState(GL_VERTEX_ARRAY);
 		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
 		glScalef(0.75f, 0.75f, 0.75f);
-		glRotatef(30, 1, 0, 0);
-		glRotatef(30, 0, 1, 0);
+		glRotatef(15, 1, 0, 0);
+		glRotatef(15, 0, 1, 0);
 
-		glTranslatef(ct[0], ct[1], ct[2]);//раздвинуть/сдвинуть грани
+		glTranslatef(ct[0], ct[1], ct[2]);//СЂР°Р·РґРІРёРЅСѓС‚СЊ/СЃРґРІРёРЅСѓС‚СЊ РіСЂР°РЅРё
 		if (textureMode == 0) glBindTexture(GL_TEXTURE_2D, 0);
 		if (textureMode == 1) glBindTexture(GL_TEXTURE_2D, texture[i]);
 		if (textureMode == 2) glBindTexture(GL_TEXTURE_2D, texture[6]);
 		glNormal3f(normals[i][0], normals[i][1], normals[i][2]);
-		glDrawArrays(GL_QUADS, i * 4, 4);//нарисовать грани
+		glDrawArrays(GL_QUADS, i * 4, 4);//РЅР°СЂРёСЃРѕРІР°С‚СЊ РіСЂР°РЅРё
 
 		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 		glDisableClientState(GL_VERTEX_ARRAY);
@@ -200,7 +201,7 @@ void init()
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_NORMALIZE);
 	glEnable(GL_TEXTURE_2D);
-
+	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);//
 
 	glEnable(GL_LIGHTING);
